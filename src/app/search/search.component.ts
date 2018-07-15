@@ -22,7 +22,6 @@ export class SearchComponent implements OnInit {
   @Input() schoolListComponent: SchoolListComponent;
 
   myControl = new FormControl();
-  // schools: School[] = [];
   options: String[] = [];
   filteredOptions: Observable<String[]>;
 
@@ -45,11 +44,14 @@ export class SearchComponent implements OnInit {
   }
 
   search(schoolName: string): void {
-    console.log(`Searching for ${schoolName}`);
     this.dataServiceService.getAllSchools().then((schools: School[]) => {
-      this.schoolListComponent.schools = schools.filter((school: School) => {
-        return school.name.toLowerCase() === schoolName.toLowerCase();
-      });
+      if(!schoolName || schoolName.length === 0) {
+        this.schoolListComponent.schools = schools.slice(0, 10);
+      } else {
+        this.schoolListComponent.schools = schools.filter((school: School) => {
+          return school.name.toLowerCase() === schoolName.toLowerCase();
+        });
+      }
     });
     
   }
