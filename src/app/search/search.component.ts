@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { SchoolServiceService } from './../services/school-service.service';
+import { School } from './../../beans/school';
+import { SchoolListComponent } from './../school-list/school-list.component';
+import { DataService } from './../services/data-service.service';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { School } from '../../beans/school';
-// import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import {
   catchError,
@@ -18,17 +18,21 @@ import { map, startWith } from 'rxjs/operators';
   styleUrls: ['./search.component.css']
 })
 export class SearchComponent implements OnInit {
+
+  @Input() schoolListComponent: SchoolListComponent;
+
   myControl = new FormControl();
-  schools: School[] = [];
+  // schools: School[] = [];
   options: String[] = [];
   filteredOptions: Observable<String[]>;
 
   constructor(
-    private schoolService: SchoolServiceService
+    private dataServiceService: DataService
   ) { }
 
   ngOnInit() {
-    this.schoolService.getAll().subscribe((schools: School[]) => {
+    this.dataServiceService.getAllSchools().then((schools: School[]) => {
+      this.schoolListComponent.schools = schools.slice(0, 10);
       schools.forEach((school: School) => {
         this.options.push(school.schoolName);
       });
@@ -40,8 +44,14 @@ export class SearchComponent implements OnInit {
       );
   }
 
-  search(term: string): void {
-    this.schoolService.getAll().subscribe(schools => this.schools = schools);
+  search(schoolName: string): void {
+    console.log(`Searching for ${schoolName}`);
+    this.dataServiceService.getAllSchools().then((schools: School[]) => {
+      this.schoolListComponent.schools = schools.filter((school: School) => {
+        return school.schoolName.toLowerCase() === schoolName.toLowerCase();
+      });
+    });
+    
   }
 
   private _filter(value: string): String[] {

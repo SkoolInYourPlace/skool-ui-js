@@ -10,7 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CdkTableModule } from '@angular/cdk/table';
 import { CdkTreeModule } from '@angular/cdk/tree';
 import { NavbarComponent } from './navbar/navbar.component';
-
+import { SchoolListComponent } from './school-list/school-list.component';
 
 import {
   MatAutocompleteModule,
@@ -90,7 +90,8 @@ import {
     MatTooltipModule,
     MatTreeModule,
   ],
-  imports: [LayoutModule, MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule]
+  imports: [LayoutModule, MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule],
+  declarations: []
 })
 export class DemoMaterialModule { }
 
@@ -98,6 +99,7 @@ export class DemoMaterialModule { }
   declarations: [
     AppComponent,
     SearchComponent,
+    SchoolListComponent,
     NavbarComponent
   ],
   imports: [
