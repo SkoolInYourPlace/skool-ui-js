@@ -1,4 +1,4 @@
-import { School } from './../../beans/school';
+import { School } from './../models/school';
 import { SchoolListComponent } from './../school-list/school-list.component';
 import { DataService } from './../services/data-service.service';
 import { Component, Input, OnInit } from '@angular/core';
@@ -34,7 +34,7 @@ export class SearchComponent implements OnInit {
     this.dataServiceService.getAllSchools().then((schools: School[]) => {
       this.schoolListComponent.schools = schools.slice(0, 10);
       schools.forEach((school: School) => {
-        this.options.push(school.schoolName);
+        this.options.push(school.name);
       });
     });
     this.filteredOptions = this.myControl.valueChanges
@@ -48,7 +48,7 @@ export class SearchComponent implements OnInit {
     console.log(`Searching for ${schoolName}`);
     this.dataServiceService.getAllSchools().then((schools: School[]) => {
       this.schoolListComponent.schools = schools.filter((school: School) => {
-        return school.schoolName.toLowerCase() === schoolName.toLowerCase();
+        return school.name.toLowerCase() === schoolName.toLowerCase();
       });
     });
     

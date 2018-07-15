@@ -1,4 +1,4 @@
-import { School } from './../../beans/school';
+import { School } from './../models/school';
 import { DataService } from './../services/data-service.service';
 import { Component, OnInit } from '@angular/core';
 

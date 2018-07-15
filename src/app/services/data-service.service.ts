@@ -1,8 +1,8 @@
+import { School } from './../models/school';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError as observableThrowError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { School } from '../../beans/school';
 
 @Injectable({
   providedIn: 'root'
