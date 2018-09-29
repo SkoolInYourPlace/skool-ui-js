@@ -20,7 +20,7 @@ export class DataService {
       this.reject = rejFn;
     });
     this.http
-      .get<School[]>('http://localhost:8080/schools/school')
+      .get<School[]>('http://172.104.54.222:8080/schools/school')
       .pipe(catchError(this.handleError))
       .subscribe((schools: School[]) => {
         this.resolve(schools);

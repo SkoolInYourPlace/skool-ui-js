@@ -11,6 +11,11 @@ import { CdkTableModule } from '@angular/cdk/table';
 import { CdkTreeModule } from '@angular/cdk/tree';
 import { NavbarComponent } from './navbar/navbar.component';
 import { SchoolListComponent } from './school-list/school-list.component';
+import { HomeComponent } from './home/home.component';
+import { SchoolDetailsComponent } from './school-details/school-details.component';
+import { Data } from './providers/provider-data';
+import { AppRoutingModule } from './app-routing.module';
+import {APP_BASE_HREF} from '@angular/common';
 
 import {
   MatAutocompleteModule,
@@ -100,7 +105,9 @@ export class DemoMaterialModule { }
     AppComponent,
     SearchComponent,
     SchoolListComponent,
-    NavbarComponent
+    NavbarComponent,
+    HomeComponent,
+    SchoolDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -115,9 +122,10 @@ export class DemoMaterialModule { }
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AppRoutingModule
   ],
-  providers: [],
+  providers: [{provide: APP_BASE_HREF, useValue : '/' },Data],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
